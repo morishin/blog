@@ -140,7 +140,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     const { body, keywords, preface, preview, title } = await PostRepository.lookup([year, month, day, slug]);
 
     const html = unified()
-        .use(rehypeStringify)
+        .use(rehypeStringify, { allowDangerousHtml: true })
         .stringify(await Post.Body.transform(body));
 
     const tableOfContents = Post.TableOfContents.extract(body);

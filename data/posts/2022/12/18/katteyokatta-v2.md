@@ -19,7 +19,7 @@ https://github.com/morishin/katteyokatta.morishin.me
 
 ## 「買ってよかったもの」とは
 
-「買ってよかったもの」は Amazon で買ってよかったものを投稿・共有するサービスです。自分が投稿した商品へのリンクは自分のアフィリエイトリンクにすることもできます。自分が気に入ったものを人に教えたり、知人が気に入っているものを教えてもらったりして生活の質を向上させることを目的としています。詳しくは[リリース記事](https://morishin.hatenablog.com/entry/release-katteyokatta)をご覧ください。
+「買ってよかったもの」は Amazon で買ってよかったものを投稿・共有するサービスです。自分が投稿した商品へのリンクは自分のアフィリエイトリンクにすることもできます。自分が気に入ったものを人に教えたり、知人が気に入っているものを教えてもらったりして生活の質を向上させることを目的としています。詳しくは[リリース記事](https://blog.morishin.me/posts/2018/05/21/release-katteyokatta)をご覧ください。
 
 https://katteyokatta.morishin.me/
 

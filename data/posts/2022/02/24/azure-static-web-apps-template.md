@@ -51,7 +51,7 @@ swa start http://localhost:3000 --api-location=http://localhost:7071
 
 ちなみに Firebase Hosting + Cloud Functions だと、本番環境では[リライト](https://firebase.google.com/docs/hosting/full-config?hl=ja#rewrites) 機能によって同様の挙動が実現できますが、ローカルの開発環境ではこのようなプロキシをやってくれるツールは用意されていません。Firebase Hosting のエミュレータがやってくれればなと思いますが。Hosting を使って開発をしていた頃はそれが無くて困ったので自分で作りました😇
 
-https://morishin.hatenablog.com/entry/rewriteproxy
+https://blog.morishin.me/posts/2021/02/12/rewriteproxy
 
 Azure すごい話はこのへんにして、個々の技術スタックの話へ移ります。
 

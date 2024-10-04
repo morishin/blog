@@ -14,7 +14,7 @@ iOS 12 がリリースされ、Siri Shortcuts が使えるようになりまし�
 
 過去にマインクラフトのマルチプレイサーバーを立てる Lambda Function を作成し、Slack の Slash Commands から叩く記事を書きました。
 
-https://morishin.hatenablog.com/entry/minecraft-lambda-function
+https://blog.morishin.me/posts/2017/02/21/minecraft-lambda-function
 
 今回はこの Lambda Function を Slack の代わりに Siri Shortcuts から叩けるようにして、<b>「Hey Siri, マイクラサーバー立てて」</b>の呼びかけでサーバーを立ててもらえるようにしました。
 

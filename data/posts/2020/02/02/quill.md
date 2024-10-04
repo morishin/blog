@@ -81,7 +81,7 @@ https://github.com/morishin/trie-swift
 
 Stripe と Cloud Functions で実装しています。過去の記事で書いたものと同じ構成で作っているので詳細はこちらをご覧ください。
 
-https://morishin.hatenablog.com/entry/stripe-firebase-payment
+https://blog.morishin.me/posts/2018/12/17/stripe-firebase-payment
 
 
 ### ライセンス発行・配信

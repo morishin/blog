@@ -181,11 +181,11 @@ https://tech.camph.net/python-guruguru/
 
 ### 2015
 
-http://morishin.hatenablog.com/entry/bitcoin-chart-bot
+http://blog.morishin.me/posts/2015/12/19/bitcoin-chart-bot
 
 ### 2016
 
-http://morishin.hatenablog.com/entry/marioai-2009
+http://blog.morishin.me/posts/2016/12/19/marioai-2009
 
 ### 2017
 

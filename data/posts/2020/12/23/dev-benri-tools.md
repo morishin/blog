@@ -55,7 +55,7 @@ CAMPHOR- Advent Calendar には初回の2014年から参加していて7度目�
 
 作った話はこちら。
 
-https://morishin.hatenablog.com/entry/quill
+https://blog.morishin.me/posts/2020/02/02/quill
 
 
 ## Slack のステータスに今やってることを反映させるやつ

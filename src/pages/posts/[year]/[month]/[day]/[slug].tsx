@@ -64,7 +64,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
             article={{ date }}
             title={title}
             description={preface}
-            preview={preview === null ? undefined : 'https://blog.ryota-ka.me' + preview}
+            preview={preview === null ? undefined : 'https://blog.morishin.me' + preview}
         >
             <header
                 className={

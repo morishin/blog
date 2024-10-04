@@ -5,9 +5,9 @@ declare namespace Links {
 }
 
 const links = [
-    ['ryota-ka.me', 'https://ryota-ka.me/'],
-    ['GitHub', 'https://github.com/ryota-ka'],
-    ['Twitter', 'https://twitter.com/ryotakameoka'],
+    ['morishin.me', 'https://morishin.me/'],
+    ['GitHub', 'https://github.com/morishin'],
+    ['𝕏', 'https://x.com/morishin127'],
 ];
 
 const Links: React.FC<Links.Props> = () => {

@@ -119,7 +119,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
                 children: preface,
             }),
             date,
-            url: 'https://blog.ryota-ka.me' + path,
+            url: 'https://blog.morishin.me' + path,
         });
     }
 

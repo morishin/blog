@@ -99,7 +99,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
         const { date, keywords, path, preface, preview, slug, title } = post;
 
         const prefaceHTML = unified()
-            .use(rehypeStringify)
+            .use(rehypeStringify, { allowDangerousHtml: true })
             .stringify(await Post.Body.transform({ type: 'root', children: preface }));
 
         posts.push({
@@ -119,7 +119,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
                 children: preface,
             }),
             date,
-            url: 'https://blog.ryota-ka.me' + path,
+            url: 'https://blog.morishin.me' + path,
         });
     }
 

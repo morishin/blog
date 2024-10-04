@@ -12,14 +12,14 @@ class RSSFeed {
 
     public constructor() {
         this.#feed = new Feed({
-            title: 'blog.ryota-ka.me',
-            link: 'https://blog.ryota-ka.me/',
-            id: 'https://blog.ryota-ka.me/',
-            copyright: `Copyright (c) ${new Date().getFullYear()} Ryota Kameoka`,
+            title: 'blog.morishin.me',
+            link: 'https://blog.morishin.me/',
+            id: 'https://blog.morishin.me/',
+            copyright: `Copyright (c) ${new Date().getFullYear()} Shintaro Morikawa`,
             author: {
-                name: 'Ryota Kameoka',
-                email: 'ok@ryota-ka.me',
-                link: 'https://ryota-ka.me/',
+                name: 'morishin',
+                email: 'sntr92@gmail.com',
+                link: 'https://morishin.me/',
             },
         });
     }

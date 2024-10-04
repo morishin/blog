@@ -28,6 +28,7 @@ const transformer = unified()
     .use(fancyLinks)
     .use(targetBlank)
     .use(remarkRehype, {
+        allowDangerousHtml: true,
         handlers: {
             code: (h: H, node: MdastNode) => {
                 if (node.type !== 'code') {
@@ -123,7 +124,7 @@ const transformer = unified()
             value: '#',
         },
     })
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .freeze();
 
 const parse = (body: string): mdast.Root => parser.parse(body);
@@ -133,7 +134,7 @@ const transform = async (node: mdast.Root): Promise<hast.Root> => await transfor
 const process = async (body: string): Promise<string> => {
     const mdast = parse(body);
     const hast = await transform(mdast);
-    return unified().use(rehypeStringify).stringify(hast);
+    return unified().use(rehypeStringify, { allowDangerousHtml: true }).stringify(hast);
 };
 
 export { parse, process, transform };

@@ -82,10 +82,6 @@
     @apply list-decimal list-inside space-y-1 pl-0;
   }
 
-  p {
-    @apply text-justify;
-  }
-
   table {
     @apply border-collapse rounded-lg;
   }

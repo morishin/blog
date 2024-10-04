@@ -81,7 +81,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
         }
 
         const prefaceHTML = unified()
-            .use(rehypeStringify)
+            .use(rehypeStringify, { allowDangerousHtml: true })
             .stringify(await Post.Body.transform({ type: 'root', children: preface }));
 
         posts.push({

@@ -14,11 +14,6 @@ keywords:
 
 https://github.com/morishin/payme
 
-【目次】
-
-[:contents]
-
-
 ---
 
 

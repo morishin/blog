@@ -20,7 +20,7 @@ https://twitter.com/morishin127/status/944830650195910656
 
 ## 開発の流れ
 ### サービスの設計
-サービスを作るにあたって、使ってもらうユーザー、そのユーザーの持つ欲求、サービスが提供する価値を設定した。こういうのを明文化するときに、クックパッドが社内で使っている EOGS というフレームワークが便利なのでその形式で書いた。EOGS に関してはこの記事(http://techlife.cookpad.com/entry/2015/06/01/135804)でちょっと触れられている。
+サービスを作るにあたって、使ってもらうユーザー、そのユーザーの持つ欲求、サービスが提供する価値を設定した。こういうのを明文化するときに、クックパッドが社内で使っている EOGS というフレームワークが便利なのでその形式で書いた。EOGS に関してはこの記事 (http://techlife.cookpad.com/entry/2015/06/01/135804) でちょっと触れられている。
 
 「買ってよかったもの」のコンセプトを EOGS 形式で書くとこんな感じになった。ユーザーは投稿する人と見る人に分けて、それぞれの欲求と提供できる価値を設定した。こうやって明文化しておくと仕様を考えるときや改善するときに方向性を見失わなくて便利。チームで開発するときの認識合わせにも良い。今回はぼっち開発だけど。
 
@@ -29,7 +29,7 @@ https://twitter.com/morishin127/status/944830650195910656
 ### 仕様決定
 先述のコンセプトを踏まえてどんなカタチのサービスにしようかなというのを考えながら、必要そうな要素をダーッと書き出したメモはこんなのだった。
 
-```
+```md
 - 買ってよかった投稿サービス
     - 買ってよかったブログがたくさんある
     - ブログを書く人を楽に、読む人を増やす
@@ -73,7 +73,7 @@ https://twitter.com/morishin127/status/944830650195910656
 
 Rails 5 を使ったのも初めてだったけど webpack とかサポートしてて色々楽で良かった。自分で追加して使った Gem はこんな感じだった。
 
-```
+```rb
 ⋮
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -103,7 +103,7 @@ UI 実装は [Materialize](https://materializecss.com/) というフレームワ
 
 リリース直後の反応ツイートをまとめたもの↓ (大半がフォロワーさん・知人ですね、ありがとうございます🙏💦)
 
-<a class="twitter-timeline" data-width="512" data-height="768" data-partner="tweetdeck" data-theme="light" data-link-color="#F2676A" href="https://twitter.com/morishin127/timelines/997405546121580544?ref_src=twsrc%5Etfw">「買ってよかったもの」リリース後の反応 - Curated tweets by morishin127</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<a class="twitter-timeline" data-width="512" data-height="768" data-partner="tweetdeck" data-theme="light" data-link-color="#F2676A" href="https://twitter.com/morishin127/timelines/997405546121580544?ref_src=twsrc%5Etfw">「買ってよかったもの」リリース後の反応 - Curated tweets by morishin127</a>
 
 ### 利用状況
 リリース日翌日がアクセスのピークでそれ以降は全然だった。

@@ -18,11 +18,11 @@ https://morishin.hatenablog.com/entry/minecraft-lambda-function
 
 今回はこの Lambda Function を Slack の代わりに Siri Shortcuts から叩けるようにして、<b>「Hey Siri, マイクラサーバー立てて」</b>の呼びかけでサーバーを立ててもらえるようにしました。
 
+---
+
 動作の様子です。(なんか多重実行されて Slack にエラーログ流れてるけど🙇)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OzKVTaXGVnM?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
----
 
 ## 仕組み
 
@@ -34,7 +34,7 @@ https://morishin.hatenablog.com/entry/minecraft-lambda-function
 
 Siri Shortcuts の作り方は簡単で、API Gateway のエンドポイントにパラメータ付きで POST リクエストを飛ばすだけでよいので、下の画像のような短い定義になりました。URL を指定するだけのアクションの下に、「URL の内容を取得」という HTTP リクエストを実行するアクションを接続して、リクエストメソッド・パラメータを指定しただけです。
 
-<img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/morishin127/20180923/20180923040443.png" loading="lazy" />
+<img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/morishin127/20180923/20180923040443.jpg" width="252" height="512" loading="lazy" />
 
 あとは「Hey Siri,」で実行できるようにフレーズを録音して登録すれば完成です。
 

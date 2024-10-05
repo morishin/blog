@@ -42,6 +42,8 @@ export const Layout: React.FC<Props> = ({ article, children, description, previe
                 <meta name="twitter:site" content="@morishin127" />
                 <meta name="twitter:title" content={title} />
                 {description !== undefined && <meta name="twitter:description" content={description} />}
+                <link rel="icon" href="/icon-32.png" />
+                <link rel="apple-touch-icon" href="/apple-icon.png" sizes="192x192" />
                 {preview !== undefined && <meta name="twitter:image" content={preview} />}
                 <meta name="robots" content="index, follow" />
             </Head>

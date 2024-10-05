@@ -33,9 +33,10 @@ https://atodeyomu.morishin.me/morishin
 
 ato de yomu は iOS ショートカットを利用することで iOS の共有シートから記事を追加できる上、記事追加 API を公開しているためユーザーの好むやり方で記事を追加することができます。僕は Alfred ヘビーユーザーなので Alfred Workflow も提供しています。
 
-<figure class="figure-image figure-image-fotolife" title="iOS 共有シートと Alfred Workflow"><div style="display: flex; flex-direction: row;">
-<img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/morishin127/20240924/20240924145653.jpg" width="355" height="339" loading="lazy" />
-<img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/morishin127/20240924/20240924145712.png" width="600" height="135" loading="lazy" /></div><figcaption>iOS 共有シートと Alfred Workflow</figcaption></figure>
+iOS 共有シート | Alfred Workflow
+---- | ----
+<img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/morishin127/20240924/20240924145653.jpg" width="355" height="339" loading="lazy" /> | <img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/morishin127/20240924/20240924145712.png" width="600" height="135" loading="lazy" />
+
 
 ### 情報収集ツールとして
 

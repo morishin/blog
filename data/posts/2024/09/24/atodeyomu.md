@@ -66,7 +66,7 @@ https://x.com/morishin127/status/1808044296664502477
 
 こういう感じのスクリプトでマイグレーションを実行しています。マイグレーションファイル無しでスキーマを宣言的に定義・管理できて最高になりました。
 
-```migrate
+```sh
 $ npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output db/schema.sql
 $ psqldef -U $POSTGRES_USER -p $POSTGRES_PORT $POSTGRES_DATABASE --enable-drop-table < db/schema.sql
 ```

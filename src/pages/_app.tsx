@@ -10,7 +10,7 @@ declare global {
     // eslint-disable-next-line no-var
     var twttr: {
         widgets: {
-            createTweet: (id: string, container: HTMLElement) => void;
+            createTweet: (id: string, container: HTMLElement, options: Record<string, string>) => void;
         };
     };
 }

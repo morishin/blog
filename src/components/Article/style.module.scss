@@ -15,7 +15,7 @@
   }
 
   a {
-    @apply text-sky-800 hover:text-sky-700 dark:text-amber-500 dark:hover:text-amber-400;
+    @apply text-orange-500 hover:text-orange-300 dark:text-amber-500 dark:hover:text-amber-400;
   }
 
   blockquote {
@@ -98,10 +98,19 @@
   }
 
   ul {
-    @apply list-['-_'] list-inside pl-0 marker:text-gray-500 dark:marker:text-gray-400;
+    @apply list-disc list-inside pl-0 marker:text-gray-500 dark:marker:text-gray-400;
   }
 
   :global(.math-display) {
     overflow-x: scroll;
+  }
+
+  :global figure {
+    @apply flex flex-col items-center;
+  }
+
+  :global figcaption {
+    font-size: 95%;
+    opacity: .7;
   }
 }

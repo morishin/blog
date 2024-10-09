@@ -20,6 +20,8 @@ type Article = {
 export const Layout: React.FC<Props> = ({ article, children, description, preview, title }) => {
     const router = useRouter();
 
+    const image = preview ?? 'https://blog.morishin.me/og-image.png';
+
     return (
         <>
             <Head>
@@ -37,14 +39,14 @@ export const Layout: React.FC<Props> = ({ article, children, description, previe
                 <meta property="og:title" content={title ?? 'blog.morishin.me'} />
                 <meta property="og:type" content={article === undefined ? 'website' : 'article'} />
                 <meta property="og:url" content={`https://blog.morishin.me${router.asPath}`} />
-                {preview !== undefined && <meta property="og:image" content={preview} />}
+                <meta property="og:image" content={image} />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:site" content="@morishin127" />
                 <meta name="twitter:title" content={title} />
+                <meta name="twitter:image" content={image} />
                 {description !== undefined && <meta name="twitter:description" content={description} />}
                 <link rel="icon" href="/icon-32.png" />
                 <link rel="apple-touch-icon" href="/apple-icon.png" sizes="192x192" />
-                {preview !== undefined && <meta name="twitter:image" content={preview} />}
             </Head>
             <header className="max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
                 <h1 className="text-base font-medium">

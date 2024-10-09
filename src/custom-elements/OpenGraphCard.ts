@@ -33,9 +33,9 @@ export class OpenGraphCard extends NonShadowedElement {
                 rel="noopener noreferrer"
             >
                 <div class="flex flex-row">
-                    <div class="flex flex-col flex-1 gap-4 py-2 px-3 tracking-normal">
+                    <div class="flex flex-col flex-1 gap-2 py-4 px-3 tracking-normal">
                         <div class="flex flex-col gap-2">
-                            <div class="text-sm line-clamp-1 text-gray-900 dark:text-gray-100 font-bold">
+                            <div class="text-base line-clamp-1 text-gray-900 dark:text-gray-100 font-bold">
                                 ${this.title}
                             </div>
                             ${this.#renderDescription()}
@@ -44,7 +44,7 @@ export class OpenGraphCard extends NonShadowedElement {
                             ${new URL(this.href).host}
                         </div>
                     </div>
-                    <div class="h-28 aspect-square sm:aspect-[40/21] sm:h-36  flex items-center">
+                    <div class="h-28 aspect-square sm:aspect-[40/21] sm:h-36 flex items-center">
                         ${this.#renderImage()}
                     </div>
                 </div>

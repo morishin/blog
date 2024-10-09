@@ -45,7 +45,6 @@ export const Layout: React.FC<Props> = ({ article, children, description, previe
                 <link rel="icon" href="/icon-32.png" />
                 <link rel="apple-touch-icon" href="/apple-icon.png" sizes="192x192" />
                 {preview !== undefined && <meta name="twitter:image" content={preview} />}
-                <meta name="robots" content="index, follow" />
             </Head>
             <header className="max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
                 <h1 className="text-base font-medium">

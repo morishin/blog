@@ -15,6 +15,7 @@ type Props = {
 type LatestPost = {
     title: string;
     path: string;
+    date: [year: string, month: string, day: string];
 };
 
 type Post = {

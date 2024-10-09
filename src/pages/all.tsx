@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Keywords, LatestPosts, Layout, Links, SideBySide } from '../components';
 import { PostRepository } from '../PostRepository';
 
-type LatestPost = {
+type Post = {
     title: string;
     path: string;
     date: [year: string, month: string, day: string];
@@ -12,25 +12,25 @@ type LatestPost = {
 
 type Props = {
     keywords: Array<[string, number]>;
-    latestPosts: LatestPost[];
+    latestPosts: Post[];
+    allPosts: Post[];
 };
 
-const Page: NextPage<Props> = ({ keywords, latestPosts }) => (
-    <Layout title="Keywords">
+const Page: NextPage<Props> = ({ keywords, latestPosts, allPosts }) => (
+    <Layout title="All posts">
         <div className="max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 pt-4">
             <SideBySide>
                 <>
-                    <h1 className="text-2xl mb-4">Keywords</h1>
+                    <h1 className="text-2xl mb-4">All posts</h1>
                     <ul className="space-y-1 text-lg list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
-                        {keywords.map(([keyword, count]) => (
-                            <li key={keyword}>
-                                <Link
-                                    href={`/keywords/${keyword}`}
-                                    className="hover:text-orange-300 dark:hover:text-amber-500"
-                                >
-                                    {keyword}
-                                </Link>{' '}
-                                <span className="text-sm text-gray-500 dark:text-gray-400">({count})</span>
+                        {allPosts.map(({ title, path, date }) => (
+                            <li key={path}>
+                                <Link href={path} className="hover:text-orange-300 dark:hover:text-amber-500">
+                                    {title}
+                                </Link>
+                                <span className="text-sm text-gray-500 dark:text-gray-400">
+                                    {` (${date[0]}-${date[1]}-${date[2]})`}
+                                </span>
                             </li>
                         ))}
                     </ul>
@@ -80,7 +80,7 @@ const getStaticProps: GetStaticProps<Props> = async () => {
                 a[1] === b[1] ? a[0].toLowerCase().localeCompare(b[0].toLowerCase()) : a[1] < b[1] ? 1 : -1,
             ),
             latestPosts,
-            posts,
+            allPosts: posts,
         },
     };
 };

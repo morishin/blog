@@ -23,16 +23,18 @@ const Keywords: React.FC<Keywords.Props> = ({ keywords, seeAllKeywords }) => {
                         <li key={keyword}>
                             <Link
                                 href={`/keywords/${keyword}`}
-                                className="hover:text-sky-700 dark:hover:text-amber-500"
+                                className="hover:text-orange-300 dark:hover:text-amber-500"
                             >
                                 {keyword}
                             </Link>
-                            {count !== null && ` (${count})`}
+                            {count !== null && (
+                                <span className="text-sm text-gray-500 dark:text-gray-400"> ({count})</span>
+                            )}
                         </li>
                     ))}
                 </ul>
                 {seeAllKeywords && (
-                    <Link href="/keywords" className="hover:text-sky-700 dark:hover:text-amber-500">
+                    <Link href="/keywords" className="hover:text-orange-300 dark:hover:text-amber-500">
                         See all keywords
                     </Link>
                 )}

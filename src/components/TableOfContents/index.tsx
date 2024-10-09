@@ -21,7 +21,7 @@ const TableOfContents: React.FC<Props> = ({ className, current, sections }) => {
                         <a
                             href={href}
                             className={
-                                'text-gray-600 dark:text-gray-300 block line-clamp-1 hover:text-sky-700 dark:hover:text-amber-500 px-1 rounded' +
+                                'text-gray-600 dark:text-gray-300 block line-clamp-1 hover:text-orange-300 dark:hover:text-amber-500 px-1 rounded' +
                                 (sub ? ' ml-4' : '') +
                                 (current === href
                                     ? ' text-gray-900 bg-gray-300/20 dark:text-white dark:bg-white/20'

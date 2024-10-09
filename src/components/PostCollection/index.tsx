@@ -39,7 +39,7 @@ const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts }) =>
                                         <li key={keyword} className="ml-1">
                                             <Link
                                                 href={`/keywords/${keyword}`}
-                                                className="hover:text-sky-700 dark:hover:text-amber-500"
+                                                className="hover:text-orange-300 dark:hover:text-amber-500"
                                             >
                                                 {keyword}
                                             </Link>

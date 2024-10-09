@@ -17,7 +17,7 @@ const Links: React.FC<Links.Props> = () => {
                 {links.map(([title, href]) => (
                     <li key={href}>
                         <a
-                            className="hover:text-sky-700 dark:hover:text-amber-500"
+                            className="hover:text-orange-300 dark:hover:text-amber-500"
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"

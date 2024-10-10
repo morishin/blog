@@ -52,7 +52,7 @@ const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts }) =>
                     <div>
                         <Article html={preface} />
                         <Link
-                            href={path + '#more'}
+                            href={path}
                             className="block w-48 mt-6 mx-auto border border-zinc-500 dark:border-zinc-600 px-4 py-2 text-center dark:text-white"
                         >
                             続きを読む

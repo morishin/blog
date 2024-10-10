@@ -20,9 +20,9 @@ declare namespace PostCollection {
 
 const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts }) => {
     return (
-        <section className="space-y-12 md:space-y-24">
+        <section className="flex flex-col flex-1 space-y-12 md:space-y-24">
             {posts.map(({ date: [year, month, day], keywords, slug, preface, path, title }) => (
-                <article key={slug}>
+                <article key={slug} className="w-[620px] max-w-full self-center pt-2 box-border">
                     <header className="w-full mb-4 md:mb-6 lg:mb-8">
                         <time className="block md:mb-2 text-base lg:text-xl">
                             {year}-{month}-{day}

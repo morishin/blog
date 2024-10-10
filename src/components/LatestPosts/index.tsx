@@ -20,7 +20,7 @@ const LatestPosts: React.FC<LatestPosts.Props> = ({ about, posts }) => {
         <SidebarContent title={`Latest posts${about === undefined ? '' : ` about ${about}`}`}>
             <div className="ml-2">
                 <ul className="space-y-1 mb-2 pl-2 list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
-                    {posts.map(({ path, title, date }) => (
+                    {posts.map(({ path, title }) => (
                         <li key={path}>
                             <Link href={path} className="hover:text-orange-300 dark:hover:text-amber-500">
                                 {title}

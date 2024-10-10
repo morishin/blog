@@ -86,7 +86,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
                 <time className="z-10 mt-2 lg:mt-4 text-base lg:text-xl">{date}</time>
             </header>
             <SideBySide className="max-w-screen-2xl mx-auto">
-                <Article className="px-2 sm:px-4 md:px-6 lg:px-8 pt-2" html={html} ref={ref} />
+                <Article className="w-[620px] max-w-full self-center pt-2 box-border" html={html} ref={ref} />
                 <>
                     <Keywords keywords={keywords.map((keyword) => ({ keyword, count: null }))} seeAllKeywords={false} />
                     {sections.length > 0 && (

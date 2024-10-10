@@ -32,11 +32,10 @@ const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts }) =>
                         </h1>
 
                         {keywords.length > 0 && (
-                            <div className="md:text-lg md:mt-1">
-                                Keywords:
-                                <ul className="inline-flex flex-row">
+                            <div className="text-sm text-gray-500 dark:text-gray-400 md:mt-1">
+                                <ul className="inline-flex flex-row space-x-1">
                                     {keywords.map((keyword, i) => (
-                                        <li key={keyword} className="ml-1">
+                                        <li key={keyword}>
                                             <Link
                                                 href={`/keywords/${keyword}`}
                                                 className="hover:text-orange-300 dark:hover:text-amber-500"

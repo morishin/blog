@@ -28,9 +28,11 @@ const LatestPosts: React.FC<LatestPosts.Props> = ({ about, posts }) => {
                         </li>
                     ))}
                 </ul>
-                <Link href="/all" className="hover:text-orange-300 dark:hover:text-amber-500">
-                    See all posts
-                </Link>
+                {about === undefined && (
+                    <Link href="/all" className="hover:text-orange-300 dark:hover:text-amber-500">
+                        See all posts
+                    </Link>
+                )}
             </div>
         </SidebarContent>
     );

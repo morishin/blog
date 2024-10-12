@@ -16,11 +16,11 @@ type Props = {
 };
 
 const Page: NextPage<Props> = ({ keywords, latestPosts }) => (
-    <Layout title="Keywords">
+    <Layout title="キーワード">
         <div className="max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 pt-4">
             <SideBySide>
                 <>
-                    <h1 className="text-2xl mb-4">Keywords</h1>
+                    <h1 className="text-2xl mb-4">キーワード</h1>
                     <ul className="space-y-1 text-lg list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
                         {keywords.map(([keyword, count]) => (
                             <li key={keyword}>

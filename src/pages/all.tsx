@@ -17,11 +17,11 @@ type Props = {
 };
 
 const Page: NextPage<Props> = ({ keywords, latestPosts, allPosts }) => (
-    <Layout title="All posts">
+    <Layout title="すべての記事">
         <div className="max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 pt-4">
             <SideBySide>
                 <>
-                    <h1 className="text-2xl mb-4">All posts</h1>
+                    <h1 className="text-2xl mb-4">すべての記事</h1>
                     <ul className="space-y-1 text-lg list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
                         {allPosts.map(({ title, path, date }) => (
                             <li key={path}>

@@ -83,3 +83,9 @@ tweets.forEach(({ tweet }: any) => {
 Deno + Deno Deploy にしたのは OpenAI ライブラリ ([openai-node](https://github.com/openai/openai-node)) が使えてデプロイや定期実行ジョブの設定が一番楽ちんという理由です。Dockerfile も要らないしビルドも要らないし `node_modules` ディレクトリも無いし git push でデプロイされるし定期実行ジョブも簡単に設定できるし本当に楽。ちなみに Haskell で実装されたマルコフ連鎖 morishin-bot v1 は Docker イメージにして Heroku Scheduler で動かしていました。
 
 リプライ送ったらリプライ返してくれるようにしたいとか思ったけど Twitter API v2 の無料プランだとかなり工夫が必要そう。
+
+## 2024/11/2 追記
+
+20分に1回の定期実行ジョブによって届いたリプライを取得して返信をするようにしてみました。一度返信したリプライには再度返信しないように Deno KV に最後に返信したツイートの ID だけ保存するようにしています。20分に1回というのは Twitter API の Rate limit の関係です。いやー無料プランは厳しい^^;
+
+https://x.com/morishin_bot/status/1852633746148917477

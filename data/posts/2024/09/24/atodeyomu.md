@@ -4,13 +4,13 @@ keywords:
   - React
 ---
 
-# 「ato de yomu」というリーディングリストのWebアプリを作りました
+# 「あとで読む」というリーディングリストのWebアプリを作りました
 
-「ato de yomu」(あとで読む) というリーディングリストのWebアプリを作りました。
+「あとで読む」というリーディングリストのWebアプリを作りました。
 
 https://atodeyomu.morishin.me/
 
-リーディングリストというのが一般的な用語かわかりませんが、Safari についてるリーディングリスト機能のイメージです。ato de yomu には次の機能があります。
+リーディングリストというのが一般的な用語かわかりませんが、Safari についてるリーディングリスト機能のイメージです。「あとで読む」には次の機能があります。
 
 * あとで読みたいウェブの記事を保存しておける
 * 読んだ記事の履歴を残せる
@@ -31,7 +31,7 @@ https://atodeyomu.morishin.me/morishin
 
 インターネットで見かけた記事をあとで読もうと思って保存しておくことがよくあるのですが、Safari のリーディングリストはイマイチでした。iOS で Safari を使っている時ならサクッと追加できるのですが、PC で Chrome を使っている時だとそうもいきません。開くのも Safari からなので他のブラウザを使う生活にはフィットしませんでした。
 
-ato de yomu は iOS ショートカットを利用することで iOS の共有シートから記事を追加できる上、記事追加 API を公開しているためユーザーの好むやり方で記事を追加することができます。僕は Alfred ヘビーユーザーなので Alfred Workflow も提供しています。
+「あとで読む」は iOS ショートカットを利用することで iOS の共有シートから記事を追加できる上、記事追加 API を公開しているためユーザーの好むやり方で記事を追加することができます。僕は Alfred ヘビーユーザーなので Alfred Workflow も提供しています。
 
 iOS 共有シート | Alfred Workflow
 ---- | ----
@@ -70,6 +70,10 @@ https://x.com/morishin127/status/1808044296664502477
 $ npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output db/schema.sql
 $ psqldef -U $POSTGRES_USER -p $POSTGRES_PORT $POSTGRES_DATABASE --enable-drop-table < db/schema.sql
 ```
+
+アプリ内の言語は英語と日本語を用意しようとして最初は英語のみでリリースしていましたが、後日多言語化の実装を施して無事に日本語でも表示されるようになりました。
+
+https://x.com/morishin127/status/1869647972100964820
 
 ソースはオープンにしているので、興味がある方はご覧ください。
 

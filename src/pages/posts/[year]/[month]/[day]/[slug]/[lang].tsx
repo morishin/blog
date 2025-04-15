@@ -1,14 +1,13 @@
 import { toString } from 'mdast-util-to-string';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
-import path from 'path';
 import { useEffect, useRef, useState } from 'react';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
-import { Article, Keywords, Layout, SideBySide, TableOfContents, LanguageSwitch } from '../../../../../components';
-import * as Post from '../../../../../Post';
-import { PostRepository } from '../../../../../PostRepository';
+import { Article, Keywords, LanguageSwitch, Layout, SideBySide, TableOfContents } from '../../../../../../components';
+import * as Post from '../../../../../../Post';
+import { type Key, PostRepository } from '../../../../../../PostRepository';
 
 type Props = {
     date: string;
@@ -89,7 +88,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
                 <h1 className="text-xl lg:text-3xl font-medium w-5/6 text-center z-10">{title}</h1>
                 <time className="z-10 mt-2 lg:mt-4 text-base lg:text-xl">{date}</time>
             </header>
-            <LanguageSwitch currentLang="ja" path={`/posts/${year}/${month}/${day}/${slug}`} />
+            <LanguageSwitch currentLang="en" path={`/posts/${year}/${month}/${day}/${slug}/en`} />
             <SideBySide className="max-w-screen-2xl mx-auto">
                 <Article className="w-[620px] max-w-full self-center pt-2 box-border" html={html} ref={ref} />
                 <>
@@ -103,17 +102,19 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
     );
 };
 
-const getStaticPaths: GetStaticPaths = async () => {
-    const posts = await PostRepository.list();
-
-    const paths = posts.map(([year, month, day, filename]) => ({
-        params: {
-            year,
-            month,
-            day,
-            slug: path.parse(filename).name,
-        },
-    }));
+export const getStaticPaths: GetStaticPaths = async () => {
+    const keys = await PostRepository.list('en');
+    const paths = keys
+        .filter(([_, __, ___, ____, lang]) => lang === 'en')
+        .map(([year, month, day, slug, lang]) => ({
+            params: {
+                year,
+                month,
+                day,
+                slug,
+                lang: lang as 'en',
+            },
+        }));
 
     return {
         paths,
@@ -121,28 +122,26 @@ const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-    const year = ctx.params?.year;
-    const month = ctx.params?.month;
-    const day = ctx.params?.day;
-    const slug = ctx.params?.slug;
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+    const { year, month, day, slug, lang } = params as {
+        year: string;
+        month: string;
+        day: string;
+        slug: string;
+        lang: string | undefined;
+    };
 
-    if (
-        year === undefined ||
-        Array.isArray(year) ||
-        month === undefined ||
-        Array.isArray(month) ||
-        day === undefined ||
-        Array.isArray(day) ||
-        slug === undefined ||
-        Array.isArray(slug)
-    ) {
+    if (lang !== 'en') {
         return {
-            notFound: true,
+            redirect: {
+                destination: `/posts/${year}/${month}/${day}/${slug}`,
+                permanent: true,
+            },
         };
     }
 
-    const { body, keywords, preface, preview, title } = await PostRepository.lookup([year, month, day, slug, null]);
+    const key: Key = [year, month, day, slug, 'en'];
+    const { body, keywords, preface, preview, title } = await PostRepository.lookup(key);
 
     const html = unified()
         .use(rehypeStringify, { allowDangerousHtml: true })
@@ -167,5 +166,4 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     };
 };
 
-export default Page;
-export { getStaticPaths, getStaticProps };
+export default Page; 

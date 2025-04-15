@@ -12,7 +12,7 @@ const links = [
 
 const Links: React.FC<Links.Props> = () => {
     return (
-        <SidebarContent title="リンク">
+        <SidebarContent title="Links">
             <ul className="space-y-1 pl-2 list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
                 {links.map(([title, href]) => (
                     <li key={href}>

@@ -16,8 +16,13 @@ export class EmbeddedTweet extends NonShadowedElement {
     }
 
     public connectedCallback(): void {
+        const id = this.id;
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        window.twttr.widgets.createTweet(this.id, this, { theme: isDark ? 'dark' : 'light' });
+        window.twttr.ready(() => {
+            window.twttr.widgets.createTweet(id, this, {
+                theme: isDark ? 'dark' : 'light',
+            });
+        });
     }
 
     public get id(): string {

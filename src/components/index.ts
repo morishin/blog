@@ -7,3 +7,4 @@ export { PostCollection } from './PostCollection';
 export { SidebarContent } from './SidebarContent';
 export { SideBySide } from './SideBySide';
 export { TableOfContents } from './TableOfContents';
+export * from './LanguageSwitch';

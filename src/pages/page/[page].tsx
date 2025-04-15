@@ -23,6 +23,7 @@ type LatestPost = {
     title: string;
     path: string;
     date: [year: string, month: string, day: string];
+    lang: 'en' | null;
 };
 
 type Post = {
@@ -33,6 +34,7 @@ type Post = {
     preview: string | null;
     preface: string;
     title: string;
+    lang: 'en' | null;
 };
 
 const Page: NextPage<Props> = ({ keywords, hasMore, latestPosts, page, posts }) => (
@@ -97,7 +99,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     const ps = await Promise.all(keys.reverse().map(async (key) => await PostRepository.lookup(key)));
 
     for (const post of ps.slice(offset, offset + PER_PAGE)) {
-        const { date, keywords, path, preface, preview, slug, title } = post;
+        const { date, keywords, path, preface, preview, slug, title, lang } = post;
 
         const prefaceHTML = unified()
             .use(rehypeStringify, { allowDangerousHtml: true })
@@ -111,6 +113,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
             path,
             preview,
             preface: prefaceHTML,
+            lang,
         });
 
         feed.register({

@@ -17,7 +17,7 @@ declare namespace LatestPosts {
 
 const LatestPosts: React.FC<LatestPosts.Props> = ({ about, posts }) => {
     return (
-        <SidebarContent title={`最近の記事${about === undefined ? '' : ` about ${about}`}`}>
+        <SidebarContent title={`Latest posts${about === undefined ? '' : ` about ${about}`}`}>
             <div className="ml-2">
                 <ul className="space-y-1 mb-2 pl-2 list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
                     {posts.map(({ path, title }) => (
@@ -30,7 +30,7 @@ const LatestPosts: React.FC<LatestPosts.Props> = ({ about, posts }) => {
                 </ul>
                 {about === undefined && (
                     <Link href="/all" className="hover:text-orange-300 dark:hover:text-amber-500">
-                        もっと見る
+                        See all posts
                     </Link>
                 )}
             </div>

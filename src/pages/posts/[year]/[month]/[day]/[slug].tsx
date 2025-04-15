@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
-import { Article, Keywords, Layout, SideBySide, TableOfContents } from '../../../../../components';
+import { Article, Keywords, Layout, SideBySide, TableOfContents, LanguageSwitch } from '../../../../../components';
 import * as Post from '../../../../../Post';
 import { PostRepository } from '../../../../../PostRepository';
 
@@ -18,9 +18,13 @@ type Props = {
     preview: string | null;
     sections: Post.TableOfContents.T;
     title: string;
+    year: string;
+    month: string;
+    day: string;
+    slug: string;
 };
 
-const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, sections, title }) => {
+const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, sections, title, year, month, day, slug }) => {
     const [currentSection, setCurrentSection] = useState<string | null>(null);
 
     const ref = useRef<HTMLElement>(null);
@@ -85,6 +89,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
                 <h1 className="text-xl lg:text-3xl font-medium w-5/6 text-center z-10">{title}</h1>
                 <time className="z-10 mt-2 lg:mt-4 text-base lg:text-xl">{date}</time>
             </header>
+            <LanguageSwitch currentLang="ja" path={`/posts/${year}/${month}/${day}/${slug}`} />
             <SideBySide className="max-w-screen-2xl mx-auto">
                 <Article className="w-[620px] max-w-full self-center pt-2 box-border" html={html} ref={ref} />
                 <>
@@ -137,7 +142,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
         };
     }
 
-    const { body, keywords, preface, preview, title } = await PostRepository.lookup([year, month, day, slug]);
+    const { body, keywords, preface, preview, title } = await PostRepository.lookup([year, month, day, slug, null]);
 
     const html = unified()
         .use(rehypeStringify, { allowDangerousHtml: true })
@@ -154,6 +159,10 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
             preview,
             sections: tableOfContents,
             title,
+            year,
+            month,
+            day,
+            slug,
         },
     };
 };

@@ -14,7 +14,7 @@ const TableOfContents: React.FC<Props> = ({ className, current, sections }) => {
     ]);
 
     return (
-        <SidebarContent className={className} title="目次">
+        <SidebarContent className={className} title="Table of Contents">
             <ul className="space-y-1 pl-1">
                 {items.map(({ title, href, sub }) => (
                     <li key={href}>

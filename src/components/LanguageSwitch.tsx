@@ -12,7 +12,7 @@ export const LanguageSwitch: React.FC<Props> = ({ currentLang, path }) => {
     return (
         <div className="flex flex-col items-center mb-4">
             <div className="inline-flex rounded-lg bg-zinc-100 dark:bg-zinc-800 p-0.5">
-                <Link
+                <a
                     href={basePath}
                     className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
                         currentLang === 'ja'
@@ -21,8 +21,8 @@ export const LanguageSwitch: React.FC<Props> = ({ currentLang, path }) => {
                     }`}
                 >
                     日本語
-                </Link>
-                <Link
+                </a>
+                <a
                     href={enPath}
                     className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
                         currentLang === 'en'
@@ -31,7 +31,7 @@ export const LanguageSwitch: React.FC<Props> = ({ currentLang, path }) => {
                     }`}
                 >
                     English
-                </Link>
+                </a>
             </div>
             {currentLang === 'en' && (
                 <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">

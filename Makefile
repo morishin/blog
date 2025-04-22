@@ -1,7 +1,7 @@
 all: build
 
 build: install
-	yarn next build
+	yarn build
 
 format: install
 	yarn prettier --write .

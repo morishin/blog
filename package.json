@@ -1,6 +1,9 @@
 {
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "next build && next-sitemap --config next-sitemap.config.cjs"
+  },
   "devDependencies": {
     "@herp-inc/eslint-config": "0.26.0",
     "@next/eslint-plugin-next": "13.4.19",
@@ -19,6 +22,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "next-remote-watch": "2.0.0",
+    "next-sitemap": "^4.2.3",
     "openai": "^4.94.0",
     "postcss": "8.4.29",
     "prettier": "3.0.3",

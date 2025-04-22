@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
-import { Article, Keywords, Layout, SideBySide, TableOfContents, LanguageSwitch } from '../../../../../components';
+import { Article, Keywords, LanguageSwitch, Layout, SideBySide, TableOfContents } from '../../../../../components';
 import * as Post from '../../../../../Post';
 import { PostRepository } from '../../../../../PostRepository';
 
@@ -69,6 +69,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
             title={title}
             description={preface}
             preview={preview === null ? undefined : 'https://blog.morishin.me' + preview}
+            keywords={keywords}
         >
             <header
                 className={

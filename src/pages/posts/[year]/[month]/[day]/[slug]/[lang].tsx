@@ -68,6 +68,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
             title={title}
             description={preface}
             preview={preview === null ? undefined : 'https://blog.morishin.me' + preview}
+            keywords={keywords}
         >
             <header
                 className={
@@ -102,10 +103,10 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
     );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+const getStaticPaths: GetStaticPaths = async () => {
     const keys = await PostRepository.list('en');
     const paths = keys
-        .filter(([_, __, ___, ____, lang]) => lang === 'en')
+        .filter(([_year, _month, _day, _slug, lang]) => lang === 'en')
         .map(([year, month, day, slug, lang]) => ({
             params: {
                 year,
@@ -122,7 +123,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     const { year, month, day, slug, lang } = params as {
         year: string;
         month: string;
@@ -166,4 +167,5 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     };
 };
 
-export default Page; 
+export { getStaticPaths, getStaticProps };
+export default Page;

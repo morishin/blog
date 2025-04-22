@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://blog.morishin.me
+
+# Sitemaps
+Sitemap: https://blog.morishin.me/sitemap.xml

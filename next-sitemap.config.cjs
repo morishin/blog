@@ -2,6 +2,7 @@
 module.exports = {
   siteUrl: 'https://blog.morishin.me',
   generateRobotsTxt: true,
+  generateIndexSitemap: false,
   robotsTxtOptions: {
     policies: [
       { userAgent: '*', allow: '/' }
@@ -10,11 +11,6 @@ module.exports = {
   changefreq: 'weekly',
   priority: 0.7,
   sitemapSize: 5000,
-  exclude: [],
-  // 言語別バージョンの対応（jaとenは同じコンテンツの翻訳版）
-  additionalPaths: async (config) => {
-    return []
-  },
   // 各ページの優先度を調整
   transform: async (config, path) => {
     // URLから日付を抽出する関数
@@ -31,10 +27,6 @@ module.exports = {
       }
       return null;
     };
-
-    // 全ページのパスリスト（予め用意される）の中から、記事ページをフィルタし、日付でソート
-    // すべてのパスを走査すると重いので記事ページのみの日付を抽出
-    const allPostDates = [];
 
     // トップページには高い優先度を設定し、最新の記事の日付を使用
     if (path === '/') {
@@ -59,7 +51,7 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.8,
-        lastmod: lastmod,
+        lastmod,
       }
     }
 

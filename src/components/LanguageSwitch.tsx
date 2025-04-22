@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 type Props = {
     currentLang: 'ja' | 'en';
     path: string;
@@ -40,4 +38,4 @@ export const LanguageSwitch: React.FC<Props> = ({ currentLang, path }) => {
             )}
         </div>
     );
-}; 
+};

@@ -5,21 +5,21 @@ type Props = DocumentInitialProps & {
 };
 
 class MyDocument extends Document<Props> {
-    static async getInitialProps(ctx: DocumentContext): Promise<Props> {
+    public static async getInitialProps(ctx: DocumentContext): Promise<Props> {
         const originalRenderPage = ctx.renderPage;
 
-        ctx.renderPage = () =>
-            originalRenderPage({
+        ctx.renderPage = async () =>
+            await originalRenderPage({
                 enhanceApp: (App) => App,
                 enhanceComponent: (Component) => Component,
             });
 
         const initialProps = await Document.getInitialProps(ctx);
-        const lang = ctx.asPath?.endsWith('/en') ? 'en' : 'ja';
+        const lang = ctx.asPath?.endsWith('/en') === true ? 'en' : 'ja';
         return { ...initialProps, lang };
     }
 
-    render() {
+    public render(): JSX.Element {
         return (
             <Html lang={this.props.lang} className="antialiased scroll-pt-8">
                 <Head />

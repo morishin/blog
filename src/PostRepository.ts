@@ -16,6 +16,7 @@ type Post = {
     slug: string;
     title: string;
     lang: 'en' | null;
+    audio: string | null;
 };
 
 const mdRoot = path.join(process.cwd(), 'data', 'posts');
@@ -23,16 +24,25 @@ const assetsRoot = path.join(process.cwd(), 'public', 'posts');
 
 const PostRepository = {
     async lookup([year, month, day, slug, lang]: Key): Promise<Post> {
-        const mdPath = lang === 'en' 
-            ? path.join(mdRoot, year, month, day, `${slug}/en.md`)
-            : path.join(mdRoot, year, month, day, `${slug}.md`);
-        
+        const mdPath =
+            lang === 'en'
+                ? path.join(mdRoot, year, month, day, `${slug}/en.md`)
+                : path.join(mdRoot, year, month, day, `${slug}.md`);
+
         const md = await fs.readFile(mdPath, { encoding: 'utf-8' });
 
         let previewExists = false;
         try {
             await fs.access(path.join(assetsRoot, year, month, day, slug, 'preview.png'));
             previewExists = true;
+        } catch {
+            // nop
+        }
+
+        let audioExists = false;
+        try {
+            await fs.access(path.join(assetsRoot, year, month, day, slug, 'audio.wav'));
+            audioExists = true;
         } catch {
             // nop
         }
@@ -47,14 +57,14 @@ const PostRepository = {
             body,
             date: [year, month, day],
             keywords,
-            path: lang === 'en' 
-                ? `/posts/${year}/${month}/${day}/${slug}/en`
-                : `/posts/${year}/${month}/${day}/${slug}`,
+            path:
+                lang === 'en' ? `/posts/${year}/${month}/${day}/${slug}/en` : `/posts/${year}/${month}/${day}/${slug}`,
             preface,
             preview: previewExists ? `/posts/${year}/${month}/${day}/${slug}/preview.png` : null,
             slug,
             title,
             lang: lang ?? null,
+            audio: audioExists ? `/posts/${year}/${month}/${day}/${slug}/audio.wav` : null,
         };
     },
 
@@ -83,12 +93,10 @@ const PostRepository = {
                                     }
                                 }
                             }
-                        } else {
+                        } else if (file.endsWith('.md')) {
                             // 日本語版の記事のみを取得
-                            if (file.endsWith('.md')) {
-                                const slug = path.parse(file).name;
-                                keys.push([year, month, day, slug, null]);
-                            }
+                            const slug = path.parse(file).name;
+                            keys.push([year, month, day, slug, null]);
                         }
                     }
                 }
@@ -100,4 +108,3 @@ const PostRepository = {
 };
 
 export { PostRepository, type Key, type Post };
-

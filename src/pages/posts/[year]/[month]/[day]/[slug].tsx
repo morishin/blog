@@ -7,6 +7,7 @@ import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
 import { Article, Keywords, LanguageSwitch, Layout, SideBySide, TableOfContents } from '../../../../../components';
+import { AudioOverview } from '../../../../../components/AudioOverview';
 import * as Post from '../../../../../Post';
 import { PostRepository } from '../../../../../PostRepository';
 
@@ -22,9 +23,23 @@ type Props = {
     month: string;
     day: string;
     slug: string;
+    audio: string | null;
 };
 
-const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, sections, title, year, month, day, slug }) => {
+const Page: React.FC<Props> = ({
+    date,
+    html,
+    keywords,
+    preface,
+    preview,
+    sections,
+    title,
+    year,
+    month,
+    day,
+    slug,
+    audio,
+}) => {
     const [currentSection, setCurrentSection] = useState<string | null>(null);
 
     const ref = useRef<HTMLElement>(null);
@@ -73,7 +88,7 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
         >
             <header
                 className={
-                    `w-full h-36 sm:h-40 md:h-48 mb-2 lg:mb-4 lg:mb-12 relative flex flex-col items-center justify-center text-white bg-zinc-900 ` +
+                    `w-full h-36 sm:h-40 md:h-48 mb-4 lg:mb-4 relative flex flex-col items-center justify-center text-white bg-zinc-900 ` +
                     (preview === null ? '' : 'lg:h-80')
                 }
             >
@@ -92,7 +107,10 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
             </header>
             <LanguageSwitch currentLang="ja" path={`/posts/${year}/${month}/${day}/${slug}`} />
             <SideBySide className="max-w-screen-2xl mx-auto">
-                <Article className="w-[620px] max-w-full self-center pt-2 box-border" html={html} ref={ref} />
+                <div className="w-[620px] max-w-full self-center pt-2 box-border flex flex-col gap-12">
+                    {audio !== null && <AudioOverview audioPath={audio} />}
+                    <Article html={html} ref={ref} />
+                </div>
                 <>
                     <Keywords keywords={keywords.map((keyword) => ({ keyword, count: null }))} seeAllKeywords={false} />
                     {sections.length > 0 && (
@@ -143,7 +161,13 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
         };
     }
 
-    const { body, keywords, preface, preview, title } = await PostRepository.lookup([year, month, day, slug, null]);
+    const { body, keywords, preface, preview, title, audio } = await PostRepository.lookup([
+        year,
+        month,
+        day,
+        slug,
+        null,
+    ]);
 
     const html = unified()
         .use(rehypeStringify, { allowDangerousHtml: true })
@@ -164,6 +188,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
             month,
             day,
             slug,
+            audio,
         },
     };
 };

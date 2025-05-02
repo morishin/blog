@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const AudioOverview: React.FC<Props> = ({ audioPath, lang }) => {
-    const title = lang === 'en' ? 'Audio Overview by NotebookLM' : 'この記事の音声要約 by NotebookLM';
+    const title = lang === 'en' ? 'Audio Overview by NotebookLM' : 'この記事の音声解説 by NotebookLM';
     return (
         <div className="p-[1.5px] dark:p-[1px] rounded-xl bg-[radial-gradient(circle_at_top_left,_#9867f0,_#ed4e50)]">
             <div className="flex flex-col p-4 pb-6 gap-4 rounded-xl border border-transparent text-sm bg-zinc-50 dark:bg-zinc-900">

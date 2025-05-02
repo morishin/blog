@@ -3,9 +3,11 @@ import { IoSparkles } from 'react-icons/io5';
 
 type Props = {
     audioPath: string;
+    lang?: 'en' | null;
 };
 
-export const AudioOverview: React.FC<Props> = ({ audioPath }) => {
+export const AudioOverview: React.FC<Props> = ({ audioPath, lang }) => {
+    const title = lang === 'en' ? 'Audio Overview by NotebookLM' : 'この記事の音声要約 by NotebookLM';
     return (
         <div className="p-[1.5px] dark:p-[1px] rounded-xl bg-[radial-gradient(circle_at_top_left,_#9867f0,_#ed4e50)]">
             <div className="flex flex-col p-4 pb-6 gap-4 rounded-xl border border-transparent text-sm bg-zinc-50 dark:bg-zinc-900">
@@ -17,7 +19,7 @@ export const AudioOverview: React.FC<Props> = ({ audioPath }) => {
                         </radialGradient>
                     </svg>
                     <IoSparkles fill="url(#radial-layer)" />
-                    <p className="text-md font-bold">この記事の音声要約 by NotebookLM</p>
+                    <p className="text-md font-bold">{title}</p>
                 </div>
                 <audio controls className="w-full">
                     <source src={audioPath} type="audio/mpeg" />

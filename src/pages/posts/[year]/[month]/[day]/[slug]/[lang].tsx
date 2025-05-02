@@ -6,6 +6,7 @@ import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
 import { Article, Keywords, LanguageSwitch, Layout, SideBySide, TableOfContents } from '../../../../../../components';
+import { AudioOverview } from '../../../../../../components/AudioOverview';
 import * as Post from '../../../../../../Post';
 import { type Key, PostRepository } from '../../../../../../PostRepository';
 
@@ -21,9 +22,23 @@ type Props = {
     month: string;
     day: string;
     slug: string;
+    audio: string | null;
 };
 
-const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, sections, title, year, month, day, slug }) => {
+const Page: React.FC<Props> = ({
+    date,
+    html,
+    keywords,
+    preface,
+    preview,
+    sections,
+    title,
+    year,
+    month,
+    day,
+    slug,
+    audio,
+}) => {
     const [currentSection, setCurrentSection] = useState<string | null>(null);
 
     const ref = useRef<HTMLElement>(null);
@@ -91,7 +106,10 @@ const Page: React.FC<Props> = ({ date, html, keywords, preface, preview, section
             </header>
             <LanguageSwitch currentLang="en" path={`/posts/${year}/${month}/${day}/${slug}/en`} />
             <SideBySide className="max-w-screen-2xl mx-auto">
-                <Article className="w-[620px] max-w-full self-center pt-2 box-border" html={html} ref={ref} />
+                <div className="w-[620px] max-w-full self-center pt-2 box-border flex flex-col gap-12">
+                    {audio !== null && <AudioOverview audioPath={audio} lang="en" />}
+                    <Article html={html} ref={ref} />
+                </div>
                 <>
                     <Keywords keywords={keywords.map((keyword) => ({ keyword, count: null }))} seeAllKeywords={false} />
                     {sections.length > 0 && (
@@ -142,7 +160,7 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     }
 
     const key: Key = [year, month, day, slug, 'en'];
-    const { body, keywords, preface, preview, title } = await PostRepository.lookup(key);
+    const { body, keywords, preface, preview, title, audio } = await PostRepository.lookup(key);
 
     const html = unified()
         .use(rehypeStringify, { allowDangerousHtml: true })
@@ -163,6 +181,7 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
             month,
             day,
             slug,
+            audio,
         },
     };
 };

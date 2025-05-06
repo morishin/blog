@@ -39,7 +39,7 @@ const PostRepository = {
             // nop
         }
 
-        const audioFileName = `audio${lang === 'en' ? '-en' : ''}.wav`;
+        const audioFileName = `audio${lang === 'en' ? '-en' : ''}.mp3`;
         let audioExists = false;
         try {
             await fs.access(path.join(assetsRoot, year, month, day, slug, audioFileName));

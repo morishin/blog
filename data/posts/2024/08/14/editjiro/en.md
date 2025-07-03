@@ -17,7 +17,7 @@ I created Editjiro, a clone app of [Editaro](https://editaro.com/), which is a t
 
 ---
 
-
+<img src="/posts/2024/08/14/editjiro/editjiro.png" width="796" height="562"/>
 
 I love the concept of Editaro, but I felt frustrated that it doesn't run on Apple Silicon and that it's built with Electron (the heaviness of Chromium), so I made a clone app as a native macOS application using Swift.
 

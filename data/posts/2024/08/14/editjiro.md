@@ -17,7 +17,7 @@ https://github.com/morishin/Editjiro
 
 ---
 
-
+<img src="/posts/2024/08/14/editjiro/editjiro.png" width="796" height="562"/>
 
 エディ太郎のコンセプトは大好きなのですが、Apple Silicon で動かないことと Electron 製であること(Chromium の重さ)につらみを感じたので Swift 製のネイティブ macOS アプリケーションとしてクローンアプリを作りました。
 

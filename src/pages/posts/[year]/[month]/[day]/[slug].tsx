@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import { toString } from 'mdast-util-to-string';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
@@ -24,6 +25,7 @@ type Props = {
     day: string;
     slug: string;
     audio: string | null;
+    hasEnglishVersion: boolean;
 };
 
 const Page: React.FC<Props> = ({
@@ -39,6 +41,7 @@ const Page: React.FC<Props> = ({
     day,
     slug,
     audio,
+    hasEnglishVersion,
 }) => {
     const [currentSection, setCurrentSection] = useState<string | null>(null);
 
@@ -78,6 +81,8 @@ const Page: React.FC<Props> = ({
         };
     });
 
+    const postPath = `/posts/${year}/${month}/${day}/${slug}`;
+
     return (
         <Layout
             article={{ date }}
@@ -85,6 +90,14 @@ const Page: React.FC<Props> = ({
             description={preface}
             preview={preview === null ? undefined : 'https://blog.morishin.me' + preview}
             keywords={keywords}
+            alternateLanguages={
+                hasEnglishVersion
+                    ? {
+                          ja: `https://blog.morishin.me${postPath}`,
+                          en: `https://blog.morishin.me${postPath}/en`,
+                      }
+                    : undefined
+            }
         >
             <header
                 className={
@@ -175,6 +188,17 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
     const tableOfContents = Post.TableOfContents.extract(body);
 
+    // 英語版 (data/posts/yyyy/mm/dd/{slug}/en.md) の有無を確認し、
+    // 実在する場合のみ hreflang alternates を出力するためのフラグを渡す。
+    const enMarkdownPath = path.join(process.cwd(), 'data', 'posts', year, month, day, slug, 'en.md');
+    let hasEnglishVersion = false;
+    try {
+        await fs.access(enMarkdownPath);
+        hasEnglishVersion = true;
+    } catch {
+        // en.md が存在しない場合は hreflang alternate を出さない
+    }
+
     return {
         props: {
             date: `${year}-${month}-${day}`,
@@ -189,6 +213,7 @@ const getStaticProps: GetStaticProps<Props> = async (ctx) => {
             day,
             slug,
             audio,
+            hasEnglishVersion,
         },
     };
 };

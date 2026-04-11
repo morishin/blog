@@ -77,6 +77,8 @@ const Page: React.FC<Props> = ({
         };
     });
 
+    const postPath = `/posts/${year}/${month}/${day}/${slug}`;
+
     return (
         <Layout
             article={{ date }}
@@ -84,6 +86,10 @@ const Page: React.FC<Props> = ({
             description={preface}
             preview={preview === null ? undefined : 'https://blog.morishin.me' + preview}
             keywords={keywords}
+            alternateLanguages={{
+                ja: `https://blog.morishin.me${postPath}`,
+                en: `https://blog.morishin.me${postPath}/en`,
+            }}
         >
             <header
                 className={

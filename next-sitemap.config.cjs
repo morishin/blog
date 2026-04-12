@@ -1,3 +1,37 @@
+const { execSync } = require('child_process');
+
+/**
+ * 指定ファイルの最終更新日時を git log から取得する。
+ * git 管理下にない / 取得に失敗した場合は null を返す。
+ */
+const getGitLastModifiedISO = (filePath) => {
+  try {
+    const iso = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
+      encoding: 'utf-8',
+      stdio: ['pipe', 'pipe', 'ignore'],
+    }).trim();
+    return iso || null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * 記事パスから該当の markdown ファイルパスを算出し、
+ * その git 最終更新日時を返す。見つからなければ null。
+ */
+const getPostLastModifiedISO = (path) => {
+  const match = path.match(/^\/posts\/(\d{4})\/(\d{2})\/(\d{2})\/([^/]+?)(\/en)?$/);
+  if (!match) {
+    return null;
+  }
+  const [, year, month, day, slug, enSegment] = match;
+  const filePath = enSegment
+    ? `data/posts/${year}/${month}/${day}/${slug}/en.md`
+    : `data/posts/${year}/${month}/${day}/${slug}.md`;
+  return getGitLastModifiedISO(filePath);
+};
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://blog.morishin.me',
@@ -11,41 +45,22 @@ module.exports = {
   changefreq: 'weekly',
   priority: 0.7,
   sitemapSize: 5000,
-  // 各ページの優先度を調整
+  // 各ページの優先度と lastmod を調整
   transform: async (config, path) => {
-    // URLから日付を抽出する関数
-    const extractDateFromPath = (path) => {
-      const match = path.match(/\/posts\/(\d{4})\/(\d{2})\/(\d{2})/);
-      if (match) {
-        const [_, year, month, day] = match;
-        // 日付を作成（時刻は12:00に設定）
-        const postDate = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0));
-        // 有効な日付ならそれを返す
-        if (!isNaN(postDate.getTime())) {
-          return postDate;
-        }
-      }
-      return null;
-    };
-
-    // トップページには高い優先度を設定し、最新の記事の日付を使用
+    // トップページには高い優先度を設定
     if (path === '/') {
-      // この時点で完全な記事リストは取得できないため、将来的な機能拡張として記述
-      // 現在は現在時刻を使用（ビルド時刻）
-      const currentDate = new Date();
-
       return {
         loc: path,
         changefreq: 'weekly',
         priority: 1.0,
-        lastmod: currentDate.toISOString(),
+        lastmod: new Date().toISOString(),
       }
     }
 
-    // 記事ページには優先度0.8を設定し、URLから日付を抽出
+    // 記事ページには優先度0.8を設定し、lastmod は git の最終更新日時を使用
     if (path.startsWith('/posts/')) {
-      const postDate = extractDateFromPath(path);
-      const lastmod = postDate ? postDate.toISOString() : new Date().toISOString();
+      const gitLastmod = getPostLastModifiedISO(path);
+      const lastmod = gitLastmod ?? new Date().toISOString();
 
       return {
         loc: path,

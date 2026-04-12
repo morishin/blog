@@ -12,31 +12,33 @@ type Props = {
     preview?: string | undefined;
     title?: string | undefined;
     keywords?: string[] | undefined;
+    // 当該ページに対応する各言語版の絶対 URL。両方のバージョンが実在する場合のみ
+    // 指定する。未指定の場合は hreflang タグを一切出力しない。
+    alternateLanguages?: AlternateLanguages | undefined;
 };
 
 type Article = {
     date: string;
 };
 
-export const Layout: React.FC<Props> = ({ article, children, description, preview, title, keywords }) => {
+type AlternateLanguages = {
+    ja: string;
+    en: string;
+};
+
+export const Layout: React.FC<Props> = ({
+    article,
+    children,
+    description,
+    preview,
+    title,
+    keywords,
+    alternateLanguages,
+}) => {
     const router = useRouter();
 
     const image = preview ?? 'https://blog.morishin.me/og-image.png';
     const url = `https://blog.morishin.me${router.asPath}`;
-
-    // 現在のURL（相対パス）から対応する言語バージョンのURLを生成
-    const getLanguageUrls = (): { jaUrl: string; enUrl: string } => {
-        const isEnglish = router.asPath.endsWith('/en');
-        const basePath = isEnglish ? router.asPath.replace(/\/en$/, '') : router.asPath;
-        const englishPath = `${basePath}/en`;
-
-        return {
-            jaUrl: `https://blog.morishin.me${basePath}`,
-            enUrl: `https://blog.morishin.me${englishPath}`,
-        };
-    };
-
-    const { jaUrl, enUrl } = getLanguageUrls();
 
     // Schema.orgの構造化データを生成
     const generateStructuredData = (): Record<string, any> => {
@@ -100,10 +102,15 @@ export const Layout: React.FC<Props> = ({ article, children, description, previe
                 )}
                 <link rel="canonical" href={url} />
 
-                {/* 言語別ページのhreflang属性（Google多言語対応） */}
-                <link rel="alternate" hrefLang="ja" href={jaUrl} />
-                <link rel="alternate" hrefLang="en" href={enUrl} />
-                <link rel="alternate" hrefLang="x-default" href={jaUrl} />
+                {/* 言語別ページのhreflang属性（Google多言語対応）。
+                    ja/en 両方が実在するページでのみ出力する。 */}
+                {alternateLanguages !== undefined && (
+                    <>
+                        <link rel="alternate" hrefLang="ja" href={alternateLanguages.ja} />
+                        <link rel="alternate" hrefLang="en" href={alternateLanguages.en} />
+                        <link rel="alternate" hrefLang="x-default" href={alternateLanguages.ja} />
+                    </>
+                )}
 
                 {/* 記事メタデータ */}
                 {article !== undefined && <meta property="article:published_time" content={article.date} />}

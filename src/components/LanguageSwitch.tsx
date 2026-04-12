@@ -31,11 +31,6 @@ export const LanguageSwitch: React.FC<Props> = ({ currentLang, path }) => {
                     English
                 </a>
             </div>
-            {currentLang === 'en' && (
-                <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
-                    This article is translated from Japanese using AI
-                </p>
-            )}
         </div>
     );
 };

@@ -6,6 +6,7 @@ declare namespace PostCollection {
     type Props = {
         accessory?: React.ReactNode;
         posts: Post[];
+        readMoreLabel?: string;
     };
 
     type Post = {
@@ -18,7 +19,7 @@ declare namespace PostCollection {
     };
 }
 
-const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts }) => {
+const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts, readMoreLabel = '続きを読む' }) => {
     return (
         <section className="flex flex-col flex-1 space-y-12 md:space-y-24">
             {posts.map(({ date: [year, month, day], keywords, slug, preface, path, title }) => (
@@ -55,7 +56,7 @@ const PostCollection: React.FC<PostCollection.Props> = ({ accessory, posts }) =>
                             href={path}
                             className="block w-48 mt-6 mx-auto border border-zinc-500 dark:border-zinc-600 px-4 py-2 text-center dark:text-white"
                         >
-                            続きを読む
+                            {readMoreLabel}
                         </Link>
                     </div>
                 </article>

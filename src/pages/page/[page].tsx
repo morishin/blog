@@ -73,11 +73,14 @@ const getStaticPaths: GetStaticPaths = async () => {
     const keys = await PostRepository.list();
     const n = Math.ceil(keys.length / PER_PAGE);
 
+    // Skip page 1 because `/` already renders the same content via
+    // src/pages/index.tsx. Emitting `/page/1` would create an exact
+    // duplicate of `/` and fragment Google's indexing signals.
     return {
         fallback: false,
-        paths: Array.from({ length: n }).map((_, i) => ({
+        paths: Array.from({ length: n - 1 }).map((_, i) => ({
             params: {
-                page: String(i + 1),
+                page: String(i + 2),
             },
         })),
     };

@@ -1,14 +1,22 @@
 import { toString } from 'mdast-util-to-string';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
 import { Article, Keywords, LanguageSwitch, Layout, SideBySide, TableOfContents } from '../../../../../../components';
 import { AudioOverview } from '../../../../../../components/AudioOverview';
+import { SidebarContent } from '../../../../../../components/SidebarContent';
 import * as Post from '../../../../../../Post';
 import { type Key, PostRepository } from '../../../../../../PostRepository';
+
+type OtherEnglishPost = {
+    title: string;
+    path: string;
+    date: [year: string, month: string, day: string];
+};
 
 type Props = {
     date: string;
@@ -23,6 +31,7 @@ type Props = {
     day: string;
     slug: string;
     audio: string | null;
+    otherEnglishPosts: OtherEnglishPost[];
 };
 
 const Page: React.FC<Props> = ({
@@ -38,6 +47,7 @@ const Page: React.FC<Props> = ({
     day,
     slug,
     audio,
+    otherEnglishPosts,
 }) => {
     const [currentSection, setCurrentSection] = useState<string | null>(null);
 
@@ -118,6 +128,22 @@ const Page: React.FC<Props> = ({
                 </div>
                 <>
                     <Keywords keywords={keywords.map((keyword) => ({ keyword, count: null }))} seeAllKeywords={false} />
+                    {otherEnglishPosts.length > 0 && (
+                        <SidebarContent title="Other English posts">
+                            <ul className="space-y-1 mb-2 ml-2 pl-2 list-['-_'] list-inside marker:text-gray-500 dark:marker:text-gray-400">
+                                {otherEnglishPosts.map(({ path, title: postTitle }) => (
+                                    <li key={path}>
+                                        <Link
+                                            href={path}
+                                            className="hover:text-orange-300 dark:hover:text-amber-500"
+                                        >
+                                            {postTitle}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </SidebarContent>
+                    )}
                     {sections.length > 0 && (
                         <TableOfContents className="sticky top-8" current={currentSection} sections={sections} />
                     )}
@@ -174,6 +200,25 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
     const tableOfContents = Post.TableOfContents.extract(body);
 
+    // 他の英語記事 (最新 5 件、現在のページ自身は除外) をサイドバー表示用に取得する。
+    // 現在のページから他の EN 記事への内部リンクを増やすことで、Googlebot が
+    // 英語コンテンツ同士を辿れるようにする狙い。
+    const allEnKeys = await PostRepository.list('en');
+    const otherEnKeys = allEnKeys
+        .filter(([y, m, d, s]) => !(y === year && m === month && d === day && s === slug))
+        .reverse()
+        .slice(0, 5);
+    const otherEnglishPosts = await Promise.all(
+        otherEnKeys.map(async (otherKey) => {
+            const other = await PostRepository.lookup(otherKey);
+            return {
+                title: other.title,
+                path: other.path,
+                date: other.date,
+            };
+        }),
+    );
+
     return {
         props: {
             date: `${year}-${month}-${day}`,
@@ -188,6 +233,7 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
             day,
             slug,
             audio,
+            otherEnglishPosts,
         },
     };
 };

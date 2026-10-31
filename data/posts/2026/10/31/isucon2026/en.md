@@ -4,7 +4,7 @@ keywords:
   - ISUCON
 ---
 
-# Entering ISUCON 2026 with a Team of AI Agents
+# Thoughts on ISUCON 2026
 
 I took part in [ISUCON 2026](https://isucon.net/). The team was one human, running Claude Code AI agents as one director and three to four implementers. I used [himkt/cafleet](https://github.com/himkt/cafleet) to orchestrate the agents. The final score was 134,946, probably around 100th place (not yet confirmed, as I wrote this before the final results were announced).
 

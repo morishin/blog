@@ -31,12 +31,15 @@ const PostRepository = {
 
         const md = await fs.readFile(mdPath, { encoding: 'utf-8' });
 
-        let previewExists = false;
-        try {
-            await fs.access(path.join(assetsRoot, year, month, day, slug, 'preview.png'));
-            previewExists = true;
-        } catch {
-            // nop
+        let previewFile: string | null = null;
+        for (const name of ['preview.webp', 'preview.png']) {
+            try {
+                await fs.access(path.join(assetsRoot, year, month, day, slug, name));
+                previewFile = name;
+                break;
+            } catch {
+                // nop
+            }
         }
 
         const audioFileName = `audio${lang === 'en' ? '-en' : ''}.mp3`;
@@ -61,7 +64,7 @@ const PostRepository = {
             path:
                 lang === 'en' ? `/posts/${year}/${month}/${day}/${slug}/en` : `/posts/${year}/${month}/${day}/${slug}`,
             preface,
-            preview: previewExists ? `/posts/${year}/${month}/${day}/${slug}/preview.png` : null,
+            preview: previewFile === null ? null : `/posts/${year}/${month}/${day}/${slug}/${previewFile}`,
             slug,
             title,
             lang: lang ?? null,

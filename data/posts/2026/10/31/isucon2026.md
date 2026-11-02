@@ -4,9 +4,9 @@ keywords:
   - ISUCON
 ---
 
-# ISUCON 2026 感想
+# ISUCON 2026 感想 (134,946点)
 
-[ISUCON 2026](https://isucon.net/) に出ました。チームは人間一人で、Claude Code の AI エージェントを指揮役 1 体と実装役 3〜4 体の体制で動かしました。エージェントのオーケストレーションツールとして [himkt/cafleet](https://github.com/himkt/cafleet) を利用しました。最終スコアは 134,946 点で、おそらく100位前後でした(執筆が最終結果発表前のため未確定)。
+[ISUCON 2026](https://isucon.net/) に出ました。チーム名は「チェリーバーガー」、メンバーは人間一人で、Claude Code の AI エージェントを指揮役 1 体と実装役 3〜4 体の体制で動かしました。エージェントのオーケストレーションツールとして [himkt/cafleet](https://github.com/himkt/cafleet) を利用しました。最終スコアは 134,946 点で、おそらく100位前後でした(執筆が最終結果発表前のため未確定)。
 
 ---
 
